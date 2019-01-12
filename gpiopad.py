@@ -45,7 +45,7 @@ level_conversion = {0: 1, 1: 0}
 def gpio_callback(pin, level, tick):
     ui.write(e.EV_KEY, gpio_keymap[pin]['ecode'], level_conversion[level])
     ui.syn()
-    print(str(pin) + ' level: ' + str(level) + ' @ ' + str(tick))
+    print(str(pin) + ' level: ' + str(level_conversion[level]) + ' @ ' + str(tick))
 
 
 # setup gpio
