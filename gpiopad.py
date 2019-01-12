@@ -49,7 +49,7 @@ def gpio_callback(pin, level, tick):
 
 
 # setup gpio
-glitch_filter_time = round(1/30*1000)  # 30 FPS
+glitch_filter_time = round(1/10*1000)  # 10 FPS
 for pin in gpio_keymap:
     # set pull up resistor
     gpio.set_pull_up_down(pin, pigpio.PUD_UP)
