@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="309e891e-28b5-4b92-91a0-67da6833a95f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gpiopad.py" beforeDir="false" afterPath="$PROJECT_DIR$/gpiopad.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gpiopad.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="47" column="61" selection-start-line="47" selection-start-column="61" selection-end-line="47" selection-end-column="61" />
+            <state relative-caret-position="255">
+              <caret line="47" column="85" selection-start-line="47" selection-start-column="85" selection-end-line="47" selection-end-column="85" />
               <folding>
                 <element signature="e#0#46#0" expanded="true" />
               </folding>
@@ -157,7 +158,28 @@
       <option name="project" value="LOCAL" />
       <updated>1547310909288</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="change debug line">
+      <created>1547311177646</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1547311177647</updated>
+    </task>
+    <task id="LOCAL-00004" summary="change debug line">
+      <created>1547311207333</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1547311207333</updated>
+    </task>
+    <task id="LOCAL-00005" summary="change debug line">
+      <created>1547311373595</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1547311373595</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -196,7 +218,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix iterator over gpio_keymap" />
     <MESSAGE value="set pull up first, than set as input to prevent glitch" />
-    <option name="LAST_COMMIT_MESSAGE" value="set pull up first, than set as input to prevent glitch" />
+    <MESSAGE value="change debug line" />
+    <option name="LAST_COMMIT_MESSAGE" value="change debug line" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -232,8 +255,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gpiopad.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="47" column="61" selection-start-line="47" selection-start-column="61" selection-end-line="47" selection-end-column="61" />
+        <state relative-caret-position="255">
+          <caret line="47" column="85" selection-start-line="47" selection-start-column="85" selection-end-line="47" selection-end-column="85" />
           <folding>
             <element signature="e#0#46#0" expanded="true" />
           </folding>
