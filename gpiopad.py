@@ -1,9 +1,8 @@
-from evdev import UInput, AbsInfo, ecodes as e
 import subprocess
-import signal
-import time
 import pigpio
-import keymap
+import signal
+import evdev
+import time
 
 
 try:
@@ -20,45 +19,42 @@ except:
 # create pigpio instance
 gpio = pigpio.pi()
 
-# load keymap configuration
-gpio_keymap = keymap.debug()
-
-# set device capabilities
-cap_key = []
-for key in gpio_keymap:
-    cap_key.append(gpio_keymap[key]['ecode'])
-
-cap = {
-    e.EV_KEY: cap_key,
-    e.EV_ABS: [
-        (e.ABS_X, AbsInfo(0, 0, 255, 0, 0, 0)),
-        (e.ABS_Y, AbsInfo(0, 0, 255, 0, 0, 0))]}
+# keymap configuration
+keymap = {19: {'controller': 'LEFT', 'keyboard': 'LEFT'},
+			26: {'controller': 'RIGHT', 'keyboard': 'RIGHT'},
+			16: {'controller': 'A', 'keyboard': 'X'},
+			20: {'controller': 'B', 'keyboard': 'Z'}}
 
 # create uinput device
-ui = UInput(cap, name='gpio-pad', version=0x1)
+keys = []
+for pin in keymap:
+	keymap[pin]['ecode'] = eval('evdev.ecodes.KEY_' + keymap[pin]['keyboard'])
+	keys.append(keymap[pin]['ecode'])
+
+cap = {evdev.ecodes.EV_KEY: keys}
+ui = evdev.UInput(cap, name='gpio-pad', version=0x1)
 
 # callback function
 # 0: falling edge
 # 1: rising edge
 # 2: watchdog timeout
-level_conversion = {0: 1, 1: 0}
+inv = {0: 1, 1: 0}
 def gpio_callback(pin, level, tick):
-    ui.write(e.EV_KEY, gpio_keymap[pin]['ecode'], level_conversion[level])
+    ui.write(evdev.ecodes.EV_KEY, keymap[pin]['ecode'], inv[level])
     ui.syn()
-    print('pin: ' + str(pin) + ' button: ' + gpio_keymap[pin]['keyboard'] + ' level: ' + str(level_conversion[level]) + ' tick: ' + str(tick))
+    print('pin: ' + str(pin) + ' button: ' + keymap[pin]['keyboard'] + ' level: ' + str(inv[level]) + ' tick: ' + str(tick))
 
-
-# setup gpio
-glitch_filter_time = round(1/10*1000)  # 10 FPS
-for pin in gpio_keymap:
-    # set pull up resistor
-    gpio.set_pull_up_down(pin, pigpio.PUD_UP)
-    # configure as input
-    gpio.set_mode(pin, pigpio.INPUT)
-    # glitch filter
-    gpio.set_glitch_filter(pin, glitch_filter_time)
-    # callback
-    gpio.callback(pin, pigpio.EITHER_EDGE, gpio_callback)
+# gpio setup
+deglitch_time = round(1/10*1000)  # 10 FPS
+for pin in keymap:
+	# set pull up resistor
+	gpio.set_pull_up_down(pin, pigpio.PUD_UP)
+	# configure as input
+	gpio.set_mode(pin, pigpio.INPUT)
+	# glitch filter
+	gpio.set_glitch_filter(pin, deglitch_time)
+	# callback
+	gpio.callback(pin, pigpio.EITHER_EDGE, gpio_callback)
 
 # main loop
 try:
